@@ -6,8 +6,6 @@ DOMable is a JavaScript library that was created for ease of DOM interaction and
 * Create and append DOM elements
 * Create and dispatch simplified HTTP requests
 
-Users have already created great projects using DOMable. Here's one such example.
-
 ## Getting Started
 
 You can start using DOMable immediately by downloading this library into your project and including the webpack output `DOMable.js` in your own code.
@@ -181,3 +179,7 @@ $d.ajax({
 })
 
 ```
+
+## Example
+
+Here is an example of a demo project using the DOMable library. To run it, clone the demo and view the html file locally.
