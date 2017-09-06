@@ -15,7 +15,7 @@ You can start using DOMable immediately by downloading this library into your pr
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="./css/reset.css">
-  <script type="text/javascript" src="../dist/dom_dom_dom.js"></script>
+  <script type="text/javascript" src="../dist/DOMable.js"></script>
   ...
 </head>
 ```
