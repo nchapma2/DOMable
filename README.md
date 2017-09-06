@@ -119,16 +119,16 @@ Can take either:
 
 `DOMNodeCollection` methods that allow you to select specific DOM elements
 
-### `children`
+####`children`
 * Returns a `DOMNodeCollection` of the direct child elements of each node in the original `DOMNodeCollection`
 
-### `parent`
+#### `parent`
 * Returns a `DOMNodeCollection` of each of the parents of the nodes in the original `DOMNodeCollection`
 
-### `find`
+#### `find`
 * Returns a `DOMNodeCollection` of all descendants matching the selector passed as an argument
 
-### `remove`
+#### `remove`
 * Removes the HTML of all nodes from the DOM, including the nodes themselves
 
 ## Event Listeners
