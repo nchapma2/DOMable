@@ -131,7 +131,7 @@ Can take either:
 #### `remove`
 * Removes the HTML of all nodes from the DOM, including the nodes themselves
 
-## Event Listeners
+### Event Listeners
 
 ```Javascript
 
@@ -159,7 +159,7 @@ button.off('click');
 #### `off`
 * Takes an argument of event type and removes that event from each node
 
-## `$d.ajax`
+### `$d.ajax`
 
 This method sends an HTTP request and returns a `Promise` object. It can accept an options `hash` with any of the following attributes:
 * method (default: 'GET'): HTTP request type
