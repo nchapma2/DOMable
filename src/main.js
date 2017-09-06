@@ -75,10 +75,10 @@ addToQueryString = obj => {
   let results = "";
   for(let property in obj){
     if(obj.hasOwnProperty(property)){
-      result += "=" + obj[property] + "&";
+      results += "=" + obj[property] + "&";
     }
   }
-  return result.substring(0, results.length - 1);
+  return results.substring(0, results.length - 1);
 };
 
 function trigger (array) {
