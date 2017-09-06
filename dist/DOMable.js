@@ -287,7 +287,7 @@ addToQueryString = obj => {
   let results = "";
   for(let property in obj){
     if(obj.hasOwnProperty(`${property}`)){
-      results += "=" + obj[property] + "&";
+      results += `${property}` + "=" + obj[property] + "&";
     }
   }
   return results.substring(0, results.length - 1);
