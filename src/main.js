@@ -43,7 +43,7 @@ $d.ajax = (options) => {
 
     options = $d.extend(defaults, options);
     if(options.method === 'GET'){
-      options.url += "?" + addToQuerySring(options.data);
+      options.url += "?" + addToQueryString(options.data);
     }
 
     const xhr = new XMLHttpRequest();
