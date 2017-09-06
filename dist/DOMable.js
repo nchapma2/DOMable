@@ -146,7 +146,7 @@ $d.ajax = (options) => {
 addToQueryString = obj => {
   let results = "";
   for(let property in obj){
-    if(obj.hasOwnProperty(property)){
+    if(obj.hasOwnProperty(`${property}`)){
       results += "=" + obj[property] + "&";
     }
   }
