@@ -33,9 +33,6 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -63,11 +60,110 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const DOMNodeCollection = __webpack_require__(1);
+
+const queue = [];
+
+Window.prototype.$d =  (arg) => {
+
+  if(arg instanceof HTMLElement){
+    return new DOMNodeCollection([arg]);
+  } else if(arg instanceof Function) {
+
+    if(document.readyState === 'complete'){
+      arg();
+    } else {
+      queue.push(arg);
+    }
+  } else {
+
+    let NodeList = document.querySelectorAll(arg);
+    NodeList = Array.from(NodeList);
+    return new DOMNodeCollection(NodeList);
+  }
+};
+
+$d.extend = (obj, ...args) => {
+  args.forEach((arg) => {
+    for(let i in arg) {
+      obj[i] = arg[i];
+    }
+  });
+  return obj;
+};
+
+$d.ajax = (options) => {
+  return new Promise(function(resolve, reject) {
+    defaults = {
+      method: 'GET',
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      data: {},
+      url: document.URL,
+      success: () => {},
+      error: () => {}
+    };
+
+    options = $d.extend(defaults, options);
+    if(options.method === 'GET'){
+      options.url += "?" + addToQueryString(options.data);
+    }
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.open(options.method, options.url, true);
+    xhr.onload = function() {
+      if(xhr.status >= 200 && xhr.status < 300){
+        options.success(JSON.parse(xhr.response));
+        resolve(JSON.parse(xhr.response));
+      } else {
+        options.error(xhr.response);
+        reject({
+          status: xhr.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+    xhr.onerror = function() {
+      reject({
+        status: xhr.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send(JSON.stringify(options.data));
+  });
+};
+
+addToQueryString = obj => {
+  let results = "";
+  for(let property in obj){
+    if(obj.hasOwnProperty(`${property}`)){
+      results += `${property}` + "=" + obj[property] + "&";
+    }
+  }
+  return results.substring(0, results.length - 1);
+};
+
+function trigger (array) {
+  for (let i = 0; i < array.length; i++) {
+    let func = array[i];
+    func();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  trigger(queue);
+});
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
 class DOMNodeCollection {
@@ -76,7 +172,7 @@ class DOMNodeCollection {
     this.elements = arr;
     this.elements.forEach ( (el) => el.callbacks = {});
   }
-
+  
   html(string) {
     if (string) {
       for (let i = 0; i < this.elements.length; i++) {
@@ -204,105 +300,6 @@ class DOMNodeCollection {
 
 
 module.exports = DOMNodeCollection;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const DOMNodeCollection = __webpack_require__(0);
-
-const queue = [];
-
-Window.prototype.$d =  (arg) => {
-
-  if(arg instanceof HTMLElement){
-    return new DOMNodeCollection([arg]);
-  } else if(arg instanceof Function) {
-
-    if(document.readyState === 'complete'){
-      arg();
-    } else {
-      queue.push(arg);
-    }
-  } else {
-
-    let NodeList = document.querySelectorAll(arg);
-    NodeList = Array.from(NodeList);
-    return new DOMNodeCollection(NodeList);
-  }
-};
-
-$d.extend = (obj, ...args) => {
-  args.forEach((arg) => {
-    for(let i in arg) {
-      obj[i] = arg[i];
-    }
-  });
-  return obj;
-};
-
-$d.ajax = (options) => {
-  return new Promise(function(resolve, reject) {
-    defaults = {
-      method: 'GET',
-      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-      data: {},
-      url: document.URL,
-      success: () => {},
-      error: () => {}
-    };
-
-    options = $d.extend(defaults, options);
-    if(options.method === 'GET'){
-      options.url += "?" + addToQueryString(options.data);
-    }
-
-    const xhr = new XMLHttpRequest();
-
-    xhr.open(options.method, options.url, true);
-    xhr.onload = function() {
-      if(xhr.status >= 200 && xhr.status < 300){
-        options.success(JSON.parse(xhr.response));
-        resolve(JSON.parse(xhr.response));
-      } else {
-        options.error(xhr.response);
-        reject({
-          status: xhr.status,
-          statusText: xhr.statusText
-        });
-      }
-    };
-    xhr.onerror = function() {
-      reject({
-        status: xhr.status,
-        statusText: xhr.statusText
-      });
-    };
-    xhr.send(JSON.stringify(options.data));
-  });
-};
-
-addToQueryString = obj => {
-  let results = "";
-  for(let property in obj){
-    if(obj.hasOwnProperty(`${property}`)){
-      results += `${property}` + "=" + obj[property] + "&";
-    }
-  }
-  return results.substring(0, results.length - 1);
-};
-
-function trigger (array) {
-  for (let i = 0; i < array.length; i++) {
-    let func = array[i];
-    func();
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  trigger(queue);
-});
 
 
 /***/ })
