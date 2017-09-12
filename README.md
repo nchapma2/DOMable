@@ -117,7 +117,7 @@ Can take either:
 
 `DOMNodeCollection` methods that allow you to select specific DOM elements
 
-####`children`
+#### `children`
 * Returns a `DOMNodeCollection` of the direct child elements of each node in the original `DOMNodeCollection`
 
 #### `parent`
