@@ -175,6 +175,7 @@ $d.ajax({
 // chaining to the promise to log the dog's name
 .then((dog) => {
   console.log(dog.name)
+  // logs 'Fido' to console
 })
 
 ```
