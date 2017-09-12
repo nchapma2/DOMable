@@ -23,7 +23,7 @@ You can also use the documents in `src` by running `webpack` in the command line
 
 ## API
 
-[`$d`](#d(HTMLElement)  
+[`$d`](#d)
 
 [DOM Traversal](#dom-traversal)  
   * [`each`](#each)  
@@ -47,7 +47,7 @@ You can also use the documents in `src` by running `webpack` in the command line
 
 [`$l.ajax`](#lajax)  
 
-### `$d(HTMLElement)`
+### `$d`
 
 DOMable uses a global variable of `$d` as a wrapper for all of the methods in the library.
 
