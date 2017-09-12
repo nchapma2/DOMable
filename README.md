@@ -44,7 +44,7 @@ You can also use the documents in `src` by running `webpack` in the command line
   * [`on`](#on)  
   * [`off`](#off)  
 
-[`$l.ajax`](#lajax)  
+[`$d.ajax`](#dajax)  
 
 ### `$d`
 
