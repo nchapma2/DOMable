@@ -26,7 +26,6 @@ You can also use the documents in `src` by running `webpack` in the command line
 [`$d`](#d)
 
 [DOM Traversal](#dom-traversal)  
-  * [`each`](#each)  
   * [`children`](#children)  
   * [`parent`](#parent)  
   * [`find`](#find)
