@@ -23,7 +23,7 @@ You can also use the documents in `src` by running `webpack` in the command line
 
 ## API
 
-[`$d`](#d)  
+[`$d`](#d(HTMLElement)  
 
 [DOM Traversal](#dom-traversal)  
   * [`each`](#each)  
