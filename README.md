@@ -52,15 +52,20 @@ DOMable uses a global variable of `$d` as a wrapper for all of the methods in th
 
 It can be used to select elements with CSS selectors. For example, `$d` returns a `DOMNodeCollection` object, a custom array-like that used to hold collections of HTML elements.
 
-`$d` can also be used to create `DOMNodeCollection` objects from HTML elements, giving them access to methods in the library.
-
-Users of DOMable can also use `$d` to take in stringified HTML code and create a `DOMNodeCollection` object of those HTML elements.
+`$d` can also be used to create `DOMNodeCollection` objects from existing HTML elements, giving them access to methods in the library.
 
 `$d` can be used as a tool to queue functions for invocation once the DOM Content is fully loaded.
+
+Users of DOMable can also use `$d` to take in stringified HTML code and create a `DOMNodeCollection` object of those HTML elements. In order to use `$d`, the user must pass the html as shown below.
+
 
 ``` JavaScript
 // This function will only run once DOMContent is fully loaded
 $d(() => {
+
+  // To create HTML elements, pass in the element without closing tags. This returns a DOMNodeCollection of the element. This can
+  // now be manipulated as the user sees fit
+  const select = $('<select>');
 
   // This variable with wrap all div elements in a DOMNodeCollection
   const divList = $d('div');

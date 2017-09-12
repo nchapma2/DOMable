@@ -71,7 +71,7 @@ const DOMNodeCollection = __webpack_require__(1);
 
 const queue = [];
 
-Window.prototype.$d =  (arg) => {
+Window.prototype.$d = (arg) => {
 
   if(arg instanceof HTMLElement){
     return new DOMNodeCollection([arg]);
@@ -83,10 +83,13 @@ Window.prototype.$d =  (arg) => {
       queue.push(arg);
     }
   } else {
-
-    let NodeList = document.querySelectorAll(arg);
-    NodeList = Array.from(NodeList);
-    return new DOMNodeCollection(NodeList);
+    if(arg[0] === '<' && arg[arg.length - 1] === '>'){
+      return new DOMNodeCollection([document.createElement(arg.slice(1, arg.length - 1))]);
+    } else {
+      let NodeList = document.querySelectorAll(arg);
+      NodeList = Array.from(NodeList);
+      return new DOMNodeCollection(NodeList);
+    }
   }
 };
 
