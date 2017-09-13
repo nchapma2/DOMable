@@ -187,4 +187,4 @@ $d.ajax({
 
 ## Example
 
-Here is an example of a demo project using the DOMable library. To run it, clone the demo and view the html file locally.
+[Here](#natechapman.tech/DotaDemo) is an example of a demo project using the DOMable library. To run it, clone the demo and view the html file locally.
